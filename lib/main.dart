@@ -1,43 +1,86 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const AppMiTabBar());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class AppMiTabBar extends StatelessWidget {
+  const AppMiTabBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: "Ejemplo Tabbar Carlos Garcia",
+      theme: ThemeData(primarySwatch: Colors.indigo),
+      home: MiPaginaInicial(),
     );
   }
-}
+} //fin AppMiTabBar
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+//statefull
+class MiPaginaInicial extends StatefulWidget {
+  const MiPaginaInicial({Key? key}) : super(key: key);
 
   @override
+  State<MiPaginaInicial> createState() => _MiPaginaInicialState();
+} //MiPaginaInicial
+
+class _MiPaginaInicialState extends State<MiPaginaInicial> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
-      ),
-    );
-  }
-}
+    return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Tabbar Carlos Garcia"),
+            centerTitle: true,
+            bottom: TabBar(tabs: [
+              Tab(
+                text: "Bebidas",
+                icon: Icon(Icons.local_bar),
+              ),
+              Tab(
+                text: "Platillos",
+                icon: Icon(Icons.lunch_dining),
+              ),
+              Tab(
+                text: "Sucursales",
+                icon: Icon(Icons.domain),
+              ),
+              Tab(
+                text: "Pedidos",
+                icon: Icon(Icons.motorcycle),
+              ),
+            ] //fin de tabs
+                ), //fin bottom TabBar
+          ),
+          body: TabBarView(children: const <Widget>[
+            Center(
+              child: Text(
+                "Refresco",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Hamburguesa",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Sucursales",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Pedidos",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+          ] // jardin de niños
+              ), //fin de tabbarview
+        ) //fin de Scaffold
+        ); //Fin DefaultTabController
+  } // fin widget
+} //_MiPaginaInicialState
